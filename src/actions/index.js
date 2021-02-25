@@ -6,5 +6,10 @@ export const requestAPI = () => ({ type: REQUEST_API });
 export const getPicture = (data) => ({ type: GET_PICTURE, data });
 
 export function fetchAPI() {
-  // Desenvolva aqui o código da action assíncrona
+  return async (dispatch) => {
+    dispatch(requestAPI());
+    const resp = await fetch('https://aws.random.cat/meow');
+    const respJson = await resp.json();
+    dispatch(getPicture(respJson));
+  }
 }
